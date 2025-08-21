@@ -23,7 +23,7 @@ export default function DigitalClock() {
       hours = hours % 12;
     }
     return `${padZero(hours)} : ${padZero(minutes)} : ${padZero(seconds)} ${
-      format === "US" ? meridiem : "git"
+      format === "US" ? meridiem : ""
     }`;
   }
 
