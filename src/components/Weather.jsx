@@ -22,7 +22,6 @@ export default function Weather() {
            
         },[]
     )
-    console.log(location)
   return (
     <>
      {location ? <div className="rounded-lg w-1/2 mt-32 ml-12 flex flex-col border-1  p-12">
