@@ -1,7 +1,9 @@
+import DigitalClock from "./components/DigitalClock";
+
 export default function App() {
     return (
     <>
-        <p className='bg-amber-500'>hello</p>
+        <DigitalClock></DigitalClock>
     </>
   )
 }
