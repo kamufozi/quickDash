@@ -22,9 +22,9 @@ export default function DigitalClock() {
     if (format === "US") {
       hours = hours % 12;
     }
-    return `${padZero(hours)} : ${padZero(minutes)} : ${padZero(
-        seconds
-      )} ${format === "US" ? meridiem : c}`;
+    return `${padZero(hours)} : ${padZero(minutes)} : ${padZero(seconds)} ${
+      format === "US" ? meridiem : "git"
+    }`;
   }
 
   function dateFormat() {
