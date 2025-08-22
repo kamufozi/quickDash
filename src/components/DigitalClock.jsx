@@ -20,7 +20,7 @@ export default function DigitalClock({ setClockType }) {
 
     const meridiem = hours >= 12 ? "PM" : "AM";
     if (format === "US") {
-      hours = hours % 12;
+      hours !== 12 ? hours = hours % 12 : hours = 12;
     }
     return `${padZero(hours)} : ${padZero(minutes)} : ${padZero(seconds)} ${
       format === "US" ? meridiem : ""
