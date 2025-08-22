@@ -1,7 +1,7 @@
 export default function App() {
-    return (
+  return (
     <>
-        <p className='bg-amber-500'>hello</p>
+      <p className="bg-amber-500">hello</p>
     </>
-  )
+  );
 }
