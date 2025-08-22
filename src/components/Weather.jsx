@@ -38,15 +38,15 @@ export default function Weather() {
   return (
     <>
 
-   <div className="w-1/2 mt-32 ml-12 flex flex-col p-12 border-2 border-y-gray-400 border-x-gray-100 rounded-2xl">
+   <div className="w-[450px] mt-10 ml-10 p-5 border-2 border-y-gray-400 border-x-gray-100 rounded-2xl">
    {isLoading?<Loading />: <div>
-   <p className="flex  gap-2 text-2xl "><CiCloud /> weather </p>  
-       <p className="text-4xl">{Math.floor(location?.main?.temp-273.15)} °C</p>
+   <p className="flex  gap-2 text-xl "><CiCloud /> weather </p>  
+       <p className="text-3xl">{Math.floor(location?.main?.temp-273.15)} °C</p>
        <p>{location?.weather[0]?.description}</p>
-       <p className="flex  gap-2 text-2xl mt-3"><IoPin /> {location?.name}, {location?.sys?.country}</p>
+       <p className="flex  gap-2 text-xl mt-3"><IoPin /> {location?.name}, {location?.sys?.country}</p>
        <div className="flex justify-between">
         <p className="mt-3 flex gap-2"><WiHumidity /> {location?.main?.humidity} %</p>
-        <p><FaWind/> {location?.wind?.speed}mph</p>
+        <p ><FaWind/> {location?.wind?.speed}mph</p>
        </div></div>}
     </div>
     </>
