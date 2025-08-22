@@ -4,11 +4,14 @@ import { IoPin } from "react-icons/io5";
 import { CiCloud } from "react-icons/ci";
 import { WiHumidity } from "react-icons/wi";
 import { FaWind } from "react-icons/fa6";
+import { ImSpinner6 } from "react-icons/im";
 
 export default function Weather() {
+    const [isLoading,setIsLoading]=useState(true);
     const [location,setLocation]= useState(null)
     useEffect(
         ()=>{
+            setIsLoading(true)
             if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition((pos)=>{
                 const lat = pos.coords.latitude
@@ -16,24 +19,36 @@ export default function Weather() {
                 const key= `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=9fad13332f362e8543c0186cbb831864`
                  fetch(key)
                 .then(res=>res.json())
-                .then(data=>setLocation(data))
+                .then(data=>{
+                  setLocation(data)
+                  setIsLoading(false)
+                })
             }
         )}
            
         },[]
     )
+    const Loading=()=>{
+      return (
+        <div>
+            <ImSpinner6  className="animate-spin text-4xl"/>
+        </div>
+      )
+    }
   return (
     <>
-     {location ? <div className="rounded-lg w-1/2 mt-32 ml-12 flex flex-col border-1  p-12">
-      <p className="flex  gap-2 text-2xl "><CiCloud /> weather </p>  
+
+   <div className="w-1/2 mt-32 ml-12 flex flex-col p-12 border-2 border-y-gray-400 border-x-gray-100 rounded-2xl">
+   {isLoading?<Loading />: <div>
+   <p className="flex  gap-2 text-2xl "><CiCloud /> weather </p>  
        <p className="text-4xl">{Math.floor(location?.main?.temp-273.15)} °C</p>
        <p>{location?.weather[0]?.description}</p>
        <p className="flex  gap-2 text-2xl mt-3"><IoPin /> {location?.name}, {location?.sys?.country}</p>
        <div className="flex justify-between">
         <p className="mt-3 flex gap-2"><WiHumidity /> {location?.main?.humidity} %</p>
         <p><FaWind/> {location?.wind?.speed}mph</p>
-       </div>
-    </div>:<p>LOADING</p>}
+       </div></div>}
+    </div>
     </>
 
   )
