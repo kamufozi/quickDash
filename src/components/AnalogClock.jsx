@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function AnalogClock() {
+export default function AnalogClock({ setClockType }) {
   const hourStyle = "absolute font-700 text-xl text-gray-600";
   const [time, setTime] = useState(new Date());
 
@@ -11,9 +11,43 @@ export default function AnalogClock() {
     return () => clearInterval(intervalId);
   }, []);
 
+  function dateFormat() {
+    const dayOfWeek = time.getDay();
+    const dayOfMonth = time.getDate();
+    const month = time.getMonth();
+    const year = time.getFullYear();
+
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    return `${dayNames[dayOfWeek]}, ${monthNames[month]} ${dayOfMonth}, ${year}`;
+  }
+
   return (
     <>
-      <div className="mt-10 ml-10 h-[315px] w-[315px] flex justify-center items-center">
+      <div className="mt-10 ml-10 h-[350px] w-[450px] flex justify-center items-center border-y-gray-400 border-x-gray-200 border-2 rounded-2xl relative">
+        <button
+          onClick={() => setClockType("digital")}
+          className="absolute top-5 left-3"
+        >
+          <span className="mx-3 text-sm border border-gray-400 rounded-2xl p-0.5 px-1 ">
+            10:01
+          </span>
+        </button>
         <div className="w-[300px] h-[300px] rounded-[50%] border-2 border-gray-400 relative">
           <div className="w-[14px] h-[14px] bg-gray-400 rounded-[50%] absolute top-0 bottom-0 left-0 right-0 m-auto z-10"></div>
           <div className={`${hourStyle} top-[10px] left-[46%]`}>XII</div>
@@ -49,6 +83,10 @@ export default function AnalogClock() {
               transform: `rotateZ(${time.getSeconds() * 6}deg)`,
             }}
           ></div>
+        </div>{" "}
+        {/*hour end*/}
+        <div className="absolute bottom-2 right-3">
+          <p className="text-sm mt-2 text-gray-900">{dateFormat()}</p>
         </div>
       </div>
     </>
