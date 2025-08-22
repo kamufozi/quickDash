@@ -1,7 +1,8 @@
+import ToDo from "./components/ToDo";
 export default function App() {
-    return (
+  return (
     <>
-        <p className='bg-amber-500'>hello</p>
+      <ToDo />
     </>
-  )
+  );
 }
