@@ -6,10 +6,11 @@ import { BsBoxArrowUpRight } from "react-icons/bs";
 export default function News() {
     const [news, setNews] = useState(null);
     const [isLoading, setIsLoading] = useState(true)
+    const API_KEY=import.meta.env.VITE_NEWS_API_TOKEN;
     useEffect(
         () => {
             setIsLoading(true)
-            const api = 'https://api.thenewsapi.com/v1/news/top?api_token=zy3ia64ciGJWSkGLEmtneSgxXl6qrj5ckS8QCKk3&locale=us&limit=3'
+            const api = `https://api.thenewsapi.com/v1/news/top?api_token=${API_KEY}&locale=us&limit=3`
             fetch(api)
                 .then(res => res.json())
                 .then(info => {
