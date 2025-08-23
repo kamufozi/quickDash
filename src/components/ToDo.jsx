@@ -6,11 +6,11 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 const ToDo = () => {
   const [input, setInput] = useState("");
   const [todos, setTodos] = useState([]);
-  const [count, setCount] = useState(0);
+  const remainingTasks = todos.length - todos.filter(t => t.isChecked).length;
+  const completedTasks = todos.length - remainingTasks;
 
   const handleDelete = (todoToRemove) => {
     setTodos(todos.filter((todo) => todo !== todoToRemove));
-    setCount((prevCount) => prevCount - 1);
   };
   return (
     <div className="m-10 text-xl border border-black rounded-2xl w-[30%] h-[50%] p-8">
@@ -28,7 +28,6 @@ const ToDo = () => {
           value={input}
           onChange={(e) => {
             setInput(e.target.value);
-            console.log(e.target.value);
           }}
         />
         <CiSquarePlus
@@ -44,7 +43,7 @@ const ToDo = () => {
         />
       </div>
       <ul>
-        {todos.length > 0 &&
+        {todos.length > 0 ? (
           todos.map((todo, index) => {
             return (
               <div
@@ -74,12 +73,15 @@ const ToDo = () => {
                 />
               </div>
             );
-          })}
+          })
+        ) : (
+          <p>hey</p>
+        )}
       </ul>
       <hr />
       <div className="flex justify-between">
-        <p> {count} remaining</p>
-        <p> {count} completed</p>
+        <p> {remainingTasks} remaining</p>
+        <p> {completedTasks} completed</p>
       </div>
     </div>
   );
