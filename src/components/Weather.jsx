@@ -9,6 +9,7 @@ import { ImSpinner6 } from "react-icons/im";
 export default function Weather() {
     const [isLoading,setIsLoading]=useState(true);
     const [location,setLocation]= useState(null)
+    const API_KEY = import.meta.env.VITE_WEATHER_API_TOKEN;
     useEffect(
         ()=>{
             setIsLoading(true)
@@ -16,7 +17,7 @@ export default function Weather() {
             navigator.geolocation.getCurrentPosition((pos)=>{
                 const lat = pos.coords.latitude
                 const long = pos.coords.longitude
-                const key= `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=9fad13332f362e8543c0186cbb831864`
+                const key= `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${API_KEY}`
                  fetch(key)
                 .then(res=>res.json())
                 .then(data=>{
