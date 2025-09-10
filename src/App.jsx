@@ -1,7 +1,16 @@
+import DigitalClock from "./components/DigitalClock";
+import AnalogClock from "./components/AnalogClock";
+import { useState } from "react";
+
 export default function App() {
-    return (
+  const [clockType, setClockType] = useState("analog");
+  return (
     <>
-        <p className='bg-amber-500'>hello</p>
+      {clockType === "digital" ? (
+        <DigitalClock setClockType={setClockType} />
+      ) : (
+        <AnalogClock setClockType={setClockType} />
+      )}
     </>
-  )
+  );
 }
